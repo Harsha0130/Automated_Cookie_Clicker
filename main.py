@@ -16,7 +16,7 @@ items = driver.find_elements(by=By.CSS_SELECTOR, value="#store div")
 item_ids = [item.get_attribute("id") for item in items]
 
 timeout = time.time() + 5
-five_min = time.time() + 60*5  # 5 minutes
+five_min = time.time() + 60 * 5  # 5 minutes
 
 while True:
     cookie.click()
@@ -39,5 +39,15 @@ while True:
         for n in range(len(item_prices)):
             cookie_upgrades[item_prices[n]] = item_ids[n]
 
+        # Get current cookie count
+        money_element = driver.find_element(by=By.ID, value="money").text
+        if "," in money_element:
+            money_element = money_element.replace(",", "")
+        cookie_count = int(money_element)
 
+        # Find upgrades that we can currently afford
+        affordable_upgrades = {}
+        for cost, id in cookie_upgrades.items():
+            if cookie_count > cost:
+                affordable_upgrades[cost] = id
 
