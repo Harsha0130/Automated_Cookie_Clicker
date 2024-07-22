@@ -34,4 +34,10 @@ while True:
                 cost = int(element_text.split("-")[1].strip().replace(",", ""))
                 item_prices.append(cost)
 
+        # Create dictionary of store items and prices
+        cookie_upgrades = {}
+        for n in range(len(item_prices)):
+            cookie_upgrades[item_prices[n]] = item_ids[n]
+
+
 
